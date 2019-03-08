@@ -37,11 +37,12 @@ opsd_reduced %>%   mutate(year=year(utc_timestamp),month=month(utc_timestamp)) %
   group_by(year,month) %>% 
   summarize(mean_v=mean(as.numeric(val),na.rm=TRUE)) %>% 
   na.omit() %>% filter(month %in% c(12,1,2)) %>% 
+  mutate(month_abb=month.abb[month]) %>% 
   ggplot(aes(x=year,y=mean_v)) + 
   geom_line(col="red",size=2) + 
-  ylab("Mean Capacity Factor Decembre") + 
+  ylab("Mean Capacity Factor") + 
   xlab("Year") +
-  facet_wrap(~month)
+  facet_wrap(~month_abb)
 #  geom_path(data=circle,aes(x,y))+
  
 ggsave("output/opsd_wind_germany.png")
