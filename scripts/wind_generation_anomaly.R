@@ -36,7 +36,7 @@ circle<-circleFun(c(2016,0.25),0.1,npoints=100)
 opsd_reduced %>%   mutate(year=year(utc_timestamp),month=month(utc_timestamp)) %>% 
   group_by(year,month) %>% 
   summarize(mean_v=mean(as.numeric(val),na.rm=TRUE)) %>% 
-  na.omit() %>% filter(month %in% c(11,12,1)) %>% 
+  na.omit() %>% filter(month %in% c(12,1,2)) %>% 
   ggplot(aes(x=year,y=mean_v)) + 
   geom_line(col="red",size=2) + 
   ylab("Mean Capacity Factor Decembre") + 
