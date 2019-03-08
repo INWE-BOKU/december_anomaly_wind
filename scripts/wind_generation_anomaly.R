@@ -33,15 +33,17 @@ opsd_reduced<-opsd %>% filter(Variable == "DE_wind_profile")
 
 circle<-circleFun(c(2016,0.25),0.1,npoints=100)
 
-opsd_reduced %>%   
-  group_by(year(utc_timestamp),month(utc_timestamp)) %>% 
+opsd_reduced %>%   mutate(year=year(utc_timestamp),month=month(utc_timestamp)) %>% 
+  group_by(year,month) %>% 
   summarize(mean_v=mean(as.numeric(val),na.rm=TRUE)) %>% 
-  na.omit() %>% filter(`month(utc_timestamp)` == 12) %>% 
-  ggplot(aes(x=`year(utc_timestamp)`,y=mean_v)) + 
+  na.omit() %>% filter(month %in% c(11,12,1)) %>% 
+  ggplot(aes(x=year,y=mean_v)) + 
   geom_line(col="red",size=2) + 
   ylab("Mean Capacity Factor Decembre") + 
   xlab("Year") +
-  geom_path(data=circle,aes(x,y))
+  facet_wrap(~month)
+#  geom_path(data=circle,aes(x,y))+
+ 
 ggsave("output/opsd_wind_germany.png")
 
 ##### Second analysis: simulated capacity factors for 1980-2016 from renewables.ninja #####
