@@ -26,7 +26,7 @@ Some examples:
 This map shows  the wind generation anomaly for December 2016 for European countries as derived from renewables.ninja:
 ![Alt text](output/onshore/map.png "Anomaly Map")
 
-This figure shows German capacity factors for December 2009-2017:
+This figure shows German capacity factors for December 2009-2017 as derived from Open Power System Data:
 ![Alt text](output/opsd_wind_germany.png "Anomaly Map")
 
 ## Authors
